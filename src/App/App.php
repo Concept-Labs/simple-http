@@ -2,6 +2,8 @@
 
 namespace Concept\SimpleHttp\App;
 
+use Psr\Http\Server\MiddlewareInterface;
+
 class App implements AppInterface
 {
     /**
@@ -28,7 +30,9 @@ class App implements AppInterface
     {
 
         foreach ($this->middlewareStack as $middleware) {
-            $middleware->handle();
+            $middleware->handle(
+                //...            
+            );
         }
     }
 }
