@@ -11,8 +11,7 @@
     ],
     "require": {
         "php": ">=8.2",
-        "concept-labs/http-message": "^1.0",
-        "concept-labs/singularity": "^1"
+        "concept-labs/http": "^1",
     },
     "autoload": {
         "psr-4": {
@@ -24,11 +23,7 @@
     "autoload-dev": {
     },
     "extra": {
-        "concept": {
-            "include": [
-                "concept.json"
-            ]
-        }
+        "concept": {}
     }
 
 }
