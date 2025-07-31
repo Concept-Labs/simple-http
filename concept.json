@@ -1,0 +1,7 @@
+{
+    "app": "@include(etc/app.json)",
+    
+    "singularity": {
+        "package": "@include(etc/package.json)"
+    }
+}
