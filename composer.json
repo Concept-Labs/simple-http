@@ -11,7 +11,8 @@
     ],
     "require": {
         "php": ">=8.2",
-        "concept-labs/http": "^1"
+        "concept-labs/http": "^1",
+        "concept-labs/phtml": "^1"
     },
     "autoload": {
         "psr-4": {
