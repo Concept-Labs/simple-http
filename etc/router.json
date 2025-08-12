@@ -1,0 +1,10 @@
+{
+    "route": {
+        "/simple-hello-world-example": {
+            "method": ["GET"],
+            "handler": {
+                "preference": "\\Concept\\SimpleHttp\\Example\\SimpleHelloWorld"
+            }
+        }
+    }
+}

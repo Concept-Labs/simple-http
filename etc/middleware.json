@@ -1,0 +1,18 @@
+{
+    "router": "@include(router.json)",
+
+    "simple-flusher": {
+        "preference": "Concept\\SimpleHttp\\Response\\FlusherInterface",
+        "priority": -1000
+    },
+    
+    "simple-throwable": {
+        "preference": "Concept\\SimpleHttp\\Response\\ThrowableInterface",
+        "priority": -999
+    },
+    "simple-404": {
+        "preference": "Concept\\SimpleHttp\\Response\\NotFound",
+        "priority": -998
+    }
+    
+}

@@ -1,7 +1,5 @@
 {
-    "app": "@include(etc/app.json)",
+    "singularity": "@include(etc/sdi.json)",
+    "middleware": "@include(etc/middleware.json)"
     
-    "singularity": {
-        "package": "@include(etc/package.json)"
-    }
 }

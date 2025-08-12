@@ -1,0 +1,24 @@
+{
+    
+    "package": {
+        "concept-labs/simple-http": {
+            "preference": {
+                "Psr\\Http\\Message\\ServerRequestInterface": {
+                    "reference": "Concept\\SimpleHttp\\Request\\SimpleRequestInterface"
+                },
+                "Concept\\SimpleHttp\\Request\\SimpleRequestInterface": {
+                    "class": "Concept\\SimpleHttp\\Request\\SimpleRequest"
+                },
+                "Concept\\SimpleHttp\\Handler\\SimpleHandlerInterface": {
+                    "class": "Concept\\SimpleHttp\\Handler\\SimpleHandler"
+                },
+                "Concept\\SimpleHttp\\Response\\FlusherInterface": {
+                    "class": "Concept\\SimpleHttp\\Response\\Flusher"
+                },
+                "Concept\\SimpleHttp\\Response\\ThrowableInterface": {
+                    "class": "Concept\\SimpleHttp\\Response\\Throwable"
+                }
+            }
+        }
+    }
+}
