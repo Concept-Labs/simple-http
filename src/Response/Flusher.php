@@ -46,7 +46,7 @@ class Flusher implements FlusherInterface
             throw new RuntimeException('Headers already sent');
             return $this;
         }
-        $this->sendHeader('X-Powered-By', ['Concept-Labs', 'Viktor Halitskyi']);
+        $this->sendHeader('X-Powered-By', ['Concept-Labs', 'Viktor Halitskyi (concept.galitsky@gmail.com)']);
         foreach ($response->getHeaders() as $name => $values) {
             $this->sendHeader($name, $values);
         }

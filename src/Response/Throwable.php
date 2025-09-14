@@ -6,6 +6,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Concept\Config\Contract\ConfigurableTrait;
+use Concept\SimpleHttp\Util\HeaderUtilInterface;
 
 class Throwable implements ThrowableInterface
 {
@@ -38,18 +39,19 @@ class Throwable implements ThrowableInterface
      */
     protected function handleException(\Throwable $e): ResponseInterface
     {
+        /**
+         * @todo Handle the exception and create a response.
+         */
         // Create a response with the exception details
         $response = $this->getResponseFactory()->createResponse(500)
-            ->withHeader('Content-Type', 'application/json');
-            
-        $response->getBody()->write(json_encode([
-            'error' => $e->getMessage(),
-            'code' => $e->getCode(),
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-        ]));
+            ->withHeader(HeaderUtilInterface::HEADER_CONTENT_TYPE, HeaderUtilInterface::CONTENT_TYPE_TEXT);
 
-        return $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write(
+            $e->getMessage() . "\n" .
+            $e->getTraceAsString()
+        );
+
+        return $response;
     }
 
     /**

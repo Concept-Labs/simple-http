@@ -1,6 +1,7 @@
 <?php
 namespace Concept\SimpleHttp\App;
 
+use Concept\Debug\Debug;
 use Concept\Http\App\AppFactory;
 
 class SimpleAppFactory extends AppFactory
@@ -14,6 +15,8 @@ class SimpleAppFactory extends AppFactory
      */
     protected function createAppInstance(array $args = []): static
     {
+        Debug::throw('SimpleAppFactory::createAppInstance() is deprecated');
+        
         $this->app = $this
             //->createService(AppInterface::class, $args)
             ->createService(SimpleHttpApp::class, $args)

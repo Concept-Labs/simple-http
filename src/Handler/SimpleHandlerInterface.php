@@ -4,6 +4,7 @@ namespace Concept\SimpleHttp\Handler;
 use Psr\Http\Message\ResponseInterface;
 use Concept\Http\Router\Route\Handler\RequestHandlerInterface as HttpRequestHandlerInterface;
 use Concept\SimpleHttp\Request\SimpleRequestInterface;
+use Concept\SimpleHttp\Util\HeaderUtilInterface;
 
 interface SimpleHandlerInterface extends HttpRequestHandlerInterface
 {
@@ -18,7 +19,7 @@ interface SimpleHandlerInterface extends HttpRequestHandlerInterface
      * 
      * @return static
      */
-    public function exec(SimpleRequestInterface $r): static;
+    public function act(SimpleRequestInterface $r): static;
 
     /**
      * Get the request object
@@ -76,7 +77,7 @@ interface SimpleHandlerInterface extends HttpRequestHandlerInterface
      * @param string $contentType
      * @return static
      */
-    public function download(string $filename, string $contentType = 'application/octet-stream'): static;
+    public function download(string $filename, string $contentType = HeaderUtilInterface::CONTENT_TYPE_OCTET_STREAM): static;
 
     /**
      * Render a PHTML template with the given context
@@ -85,7 +86,7 @@ interface SimpleHandlerInterface extends HttpRequestHandlerInterface
      * @param array $context
      * @return static
      */
-    public function phtml(string $template, array $context = []): static;
+    //public function phtml(string $template, array $context = []): static;
 
     /**
      * Redirect to a URL

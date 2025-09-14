@@ -6,6 +6,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Concept\Config\Contract\ConfigurableTrait;
+use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
 class NotFound implements MiddlewareInterface
@@ -24,13 +25,13 @@ class NotFound implements MiddlewareInterface
         //Give the request to be handled first
         $response = $handler->handle($request);
 
-        if ($response->getStatusCode() === 404) {
+        if ($response->getStatusCode() === StatusCodeInterface::STATUS_NOT_FOUND) {
             /**
              @todo: Handle 404 Not Found response with layout object or custom rendering logic
              */
             $response = $this->getResponseFactory()
-                ->createResponse(404)
-                    ->withHeader('Content-Type', 'text/plain');
+                ->createResponse(StatusCodeInterface::STATUS_NOT_FOUND)
+                    ->withHeader(HeaderUtilInterface::HEADER_CONTENT_TYPE, HeaderUtilInterface::CONTENT_TYPE_TEXT);
 
             $response->getBody()->write(
                 sprintf(

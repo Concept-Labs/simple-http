@@ -1,5 +1,5 @@
 <?php
-namespace Concept\SimpleHttp\Response;
+namespace Concept\SimpleHttp\Util;
 
 /**
  * Interface HeaderUtilInterface
@@ -21,7 +21,9 @@ interface HeaderUtilInterface
     const HEADER_X_FRAME_OPTIONS = 'X-Frame-Options';
     const HEADER_X_CONTENT_TYPE_OPTIONS = 'X-Content-Type-Options';
     const HEADER_X_XSS_PROTECTION = 'X-XSS-Protection';
+    const HEADER_CONTENT_DISPOSITION = 'Content-Disposition';
 
+    const CONTENT_TYPE_OCTET_STREAM = 'application/octet-stream';
     const CONTENT_TYPE_HTML = 'text/html';
     const CONTENT_TYPE_JSON = 'application/json';
     const CONTENT_TYPE_XML = 'application/xml';

@@ -1,16 +1,16 @@
 {
-    "router": "@include(router.json)",
+    "router": "@include(example/router.json)",
 
-    "simple-flusher": {
+    "concept-labs/simple-http:flusher": {
         "preference": "Concept\\SimpleHttp\\Response\\FlusherInterface",
         "priority": -1000
     },
-    
-    "simple-throwable": {
+
+    "concept-labs/simple-http:throwable": {
         "preference": "Concept\\SimpleHttp\\Response\\ThrowableInterface",
         "priority": -999
     },
-    "simple-404": {
+    "concept-labs/simple-http:404": {
         "preference": "Concept\\SimpleHttp\\Response\\NotFound",
         "priority": -998
     }

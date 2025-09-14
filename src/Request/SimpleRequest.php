@@ -51,6 +51,17 @@ class SimpleRequest  implements SimpleRequestInterface
         return $cookies[$name] ?? $default;
     }
 
+    public function session(string $name, mixed $value = null): mixed
+    {
+        // Assuming session is started and available via $_SESSION superglobal
+        if ($value !== null) {
+            $_SESSION[$name] = $value;
+            return $this;
+        }
+
+        return $_SESSION[$name] ?? null;
+    }
+
     /**
      * {@inheritDoc}
      */

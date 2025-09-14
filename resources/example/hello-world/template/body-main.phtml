@@ -1,0 +1,27 @@
+    <h1>This is the the example of a full page template</h1>
+    <ul>
+        <li>
+            Context value (escaped): <?= $this('example-escaped-message') ?>    
+        </li>
+        <li>
+            Raw Value context: <?= $this('@raw(something-raw)') ?>
+        </li>
+        
+        <li>
+            Plugins:
+            <ul>
+                <li>
+                    Simple plugin: <?= $this('@example.div.red(something red)') ?>
+                </li>
+                <li>
+                    Nested plugin: <?= $this('@example.div.red(@example.div.nested(something green nested w/o context value))') ?>
+                </li>
+                <li>
+                    JSON plugin with context value: <?= $this('@json(some_json)') ?>
+                </li>
+                <li>
+                    JSON plugin w/o context: <?= $this('@json({"one":1,"two":2,"three":3})') ?>
+                </li>
+            </ul>
+        </li>
+    </ul>

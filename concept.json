@@ -1,5 +1,4 @@
 {
     "singularity": "@include(etc/sdi.json)",
     "middleware": "@include(etc/middleware.json)"
-    
 }

@@ -1,13 +1,14 @@
 <?php
 namespace Concept\SimpleHttp\Handler;
 
-use Concept\Config\Contract\ConfigurableTrait;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Concept\Config\Contract\ConfigurableTrait;
+use Concept\Http\App\Config\AppConfigInterface;
 use Concept\Http\Router\Route\Handler\RequestHandler;
-use Concept\Phtml\Template\Factory\PhtmlFactoryInterface;
 use Concept\SimpleHttp\Request\SimpleRequestInterface;
+use Concept\SimpleHttp\Util\HeaderUtilInterface;
 
 abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInterface
 {
@@ -22,18 +23,12 @@ abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInte
      * Dependency injection constructor
      *
      * @param ResponseFactoryInterface $responseFactory
-     * @param PhtmlFactoryInterface $phtmlFactory
      */
     public function __construct(
-        protected ResponseFactoryInterface $responseFactory,
-        /** @var SimpleRequestInterface The simplified request object */
         protected SimpleRequestInterface $simpleRequest,
-        //protected LayoutFactoryInterface $layoutFactory, // Optional, if you need layout rendering
-        /** @var PhtmlFactoryInterface The PHTML factory for rendering templates */
-        protected PhtmlFactoryInterface $phtmlFactory
+        protected AppConfigInterface $appConfig
     )
     {
-        parent::__construct($responseFactory);
     }
 
     /**
@@ -43,21 +38,16 @@ abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInte
      *
      * @return static
      */
-    abstract public function exec(SimpleRequestInterface $request): static;
+    abstract public function act(SimpleRequestInterface $request): static;
 
     /**
-     * Get the PHTML factory
+     * Get the application config
      *
-     * @return PhtmlFactoryInterface
-     * @throws \RuntimeException
+     * @return AppConfigInterface
      */
-    protected function getPhtmlFactory(): PhtmlFactoryInterface
+    protected function getAppConfig(): AppConfigInterface
     {
-        if (!$this->phtmlFactory instanceof PhtmlFactoryInterface) {
-            throw new \RuntimeException('Phtml factory is not set or invalid.');
-        }
-
-        return $this->phtmlFactory;
+        return $this->appConfig;
     }
 
     /**
@@ -69,7 +59,7 @@ abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInte
     protected function setRequest(ServerRequestInterface $request): static
     {
         $this->request = $request;
-        $this->simpleRequest->setServerRequest($request);
+        $this->getSimpleRequest()->setServerRequest($request);
 
         return $this;
     }
@@ -102,13 +92,12 @@ abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInte
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Set the request object and the simple request
+        // Set the request object and create the simple request
         $this->setRequest($request);
 
         // Handle the request using the specific implementation
-        $this->exec($this->getSimpleRequest());
+        $this->act($this->getSimpleRequest());
 
-        // Return the response object
         return $this->getResponse();
     }
 
@@ -150,7 +139,7 @@ abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInte
     public function application(string $type, string $body): static
     {
         return $this
-            ->header('Content-Type', $type)
+            ->header(HeaderUtilInterface::HEADER_CONTENT_TYPE, $type)
             ->body($body);
     }
 
@@ -159,7 +148,10 @@ abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInte
      */
     public function json(array $data): static
     {
-        $this->application('application/json', json_encode($data, JSON_THROW_ON_ERROR));
+        $this->application(
+            HeaderUtilInterface::CONTENT_TYPE_JSON, 
+            json_encode($data, JSON_THROW_ON_ERROR)
+        );
 
         return $this;
     }
@@ -167,29 +159,17 @@ abstract class SimpleHandler extends RequestHandler implements SimpleHandlerInte
     /**
      * {@inheritDoc}
      */
-    public function download(string $filename, string $contentType = 'application/octet-stream'): static
+    public function download(string $filename, ?string $as = null, string $contentType = HeaderUtilInterface::CONTENT_TYPE_OCTET_STREAM): static
     {
+        $as = $as ?: basename($filename);
+
         $this->response = $this->getResponse()
-            ->withHeader('Content-Disposition', 'attachment; filename="' . basename($filename) . '"')
-            ->withHeader('Content-Type', $contentType);
+            ->withHeader(
+                HeaderUtilInterface::HEADER_CONTENT_DISPOSITION,
+                'attachment; filename="' . $as . '"'
+            )
+            ->withHeader(HeaderUtilInterface::HEADER_CONTENT_TYPE, $contentType);
 
-        return $this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function phtml(string $template, array $context = []): static
-    {
-        $phtmlFactory = $this->getPhtmlFactory();
-        $phtml = $phtmlFactory->create();
-        $content = $phtml->render($template, $context);
-
-        $this
-            ->status(200)
-            ->header('Content-Type', 'text/html')
-            ->body($content)
-        ;
         return $this;
     }
 

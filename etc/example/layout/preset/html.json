@@ -1,0 +1,34 @@
+{
+    ".": {
+        "type": "\\Concept\\SimpleHttp\\Layout\\Component\\Phtml\\Phtml",
+        "resources": "${VENDOR}/concept-labs/simple-http/resources/",
+        "template": "example/hello-world/template/page.phtml",
+        "context": {
+            "pageTitle": "Simple Hello World Example"
+        },
+        "plugins": {
+            "raw": {
+                "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\RawPlugin"
+            },
+            "escape": {
+                "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\EscapePlugin"
+            },
+            "uppercase": {
+                "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\UppercasePlugin"
+            },
+            "json": {
+                "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\JsonPlugin"
+            }
+        }
+    },
+    ".head": {
+        
+        "template": "example/hello-world/template/head.phtml"
+    },
+    ".body": {
+        "template": "example/hello-world/template/body.phtml"
+    },
+    ".body.main": {
+        "template": "example/hello-world/template/body-main.phtml"
+    }
+}

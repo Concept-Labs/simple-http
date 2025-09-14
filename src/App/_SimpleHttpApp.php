@@ -3,7 +3,6 @@ namespace Concept\SimpleHttp\App;
 
 use Concept\Http\App\HttpApp;
 
-
 /**
  * SimpleHttpApp class
  * This class extends HttpApp to provide a simple HTTP application implementation.
