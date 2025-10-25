@@ -1,0 +1,12 @@
+{
+    "phtml": "@include(layouts/phtml.json)",
+    "--blade": "include(layouts/blade.json)",
+    "--twig": "include(layouts/twig.json)",
+    "--json": "include(layouts/json.json)",
+    "--xml": "include(layouts/xml.json)",
+    "--raw": "include(layouts/raw.json)",
+    "--html": "include(layouts/html.json)",
+    "--markdown": "include(layouts/markdown.json)",
+    "--csv": "include(layouts/csv.json)",
+    "--text": "include(layouts/text.json)"
+}

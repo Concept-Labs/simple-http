@@ -47,6 +47,7 @@ class Throwable implements ThrowableInterface
             ->withHeader(HeaderUtilInterface::HEADER_CONTENT_TYPE, HeaderUtilInterface::CONTENT_TYPE_TEXT);
 
         $response->getBody()->write(
+            "Throwable caught:\n" .
             $e->getMessage() . "\n" .
             $e->getTraceAsString()
         );

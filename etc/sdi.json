@@ -1,12 +1,10 @@
 {
-    
     "package": {
         "concept-labs/simple-http": {
             "preference": {
                 "Concept\\Http\\AppInterface": {
-                        "class": "Concept\\SimpleHttp\\App\\SimpleHttpApps"
-                    },
-
+                    "class": "Concept\\SimpleHttp\\App\\SimpleHttpApps"
+                },
                 "Psr\\Http\\Message\\ServerRequestInterface": {
                     "preference": "Concept\\SimpleHttp\\Request\\SimpleRequest"
                 },
@@ -22,15 +20,12 @@
                 "Concept\\SimpleHttp\\Response\\ThrowableInterface": {
                     "class": "Concept\\SimpleHttp\\Response\\Throwable"
                 },
-
-
                 "Concept\\SimpleHttp\\Layout\\Context\\ContextInterface": {
                     "class": "Concept\\SimpleHttp\\Layout\\Context\\Context"
                 },
                 "Concept\\SimpleHttp\\Layout\\LayoutBuilderInterface": {
                     "class": "Concept\\SimpleHttp\\Layout\\LayoutBuilder"
                 },
-                
                 "Concept\\SimpleHttp\\Layout\\Component\\ComponentFactoryInterface": {
                     "class": "Concept\\SimpleHttp\\Layout\\Component\\ComponentFactory"
                 },

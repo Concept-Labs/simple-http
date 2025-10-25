@@ -1,0 +1,17 @@
+{
+    "type": "\\Concept\\SimpleHttp\\Layout\\Component\\Phtml\\Phtml",
+    "plugins": {
+        "raw": {
+            "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\RawPlugin"
+        },
+        "escape": {
+            "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\EscapePlugin"
+        },
+        "uppercase": {
+            "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\UppercasePlugin"
+        },
+        "json": {
+            "preference": "\\Concept\\SimpleHttp\\Layout\\Component\\Plugin\\JsonPlugin"
+        }
+    }
+}

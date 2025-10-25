@@ -42,25 +42,19 @@ class Flusher implements FlusherInterface
      */
     protected function sendHeaders(ResponseInterface $response): static
     {
+        http_response_code($response->getStatusCode());
+        
         if (headers_sent()) {
             throw new RuntimeException('Headers already sent');
-            return $this;
         }
         $this->sendHeader('X-Powered-By', ['Concept-Labs', 'Viktor Halitskyi (concept.galitsky@gmail.com)']);
         foreach ($response->getHeaders() as $name => $values) {
             $this->sendHeader($name, $values);
         }
 
-        header(
-            sprintf(
-                'HTTP/%s %d %s',
-                $response->getProtocolVersion(),
-                $response->getStatusCode(),
-                $response->getReasonPhrase()
-            ),
-            true,
-            $response->getStatusCode()
-        );
+        if ($response->getReasonPhrase() !== '') {
+            $this->sendHeader('Status', [sprintf('%d %s', $response->getStatusCode(), $response->getReasonPhrase())]);
+        }
 
         return $this;
     }
@@ -99,7 +93,16 @@ class Flusher implements FlusherInterface
             $body->rewind();
         }
 
-        echo $body;
+        while (!$body->eof()) {
+            $oh = fopen('php://output', 'wb');
+            if ($oh === false) {
+                throw new RuntimeException('Failed to open output stream');
+            }
+            stream_copy_to_stream($body->detach(), $oh);
+            fclose($oh);
+
+        }
+        //echo $body->read(8192);
 
         return $this;
     }

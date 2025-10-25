@@ -2,6 +2,7 @@
 namespace Concept\SimpleHttp\Layout\Component;
 
 use Concept\Config\Contract\ConfigurableTrait;
+use Concept\Http\App\Config\AppConfigInterface;
 use Concept\SimpleHttp\Layout\Context\ContextInterface;
 use Concept\SimpleHttp\Layout\LayoutInterface;
 
@@ -18,6 +19,7 @@ abstract class AbstractComponent implements ComponentInterface
     private array $children = [];
 
     public function __construct(
+        private AppConfigInterface $appConfig,
         private ContextInterface $context, 
         private PluginManagerInterface $pluginManager
     )
@@ -257,6 +259,16 @@ abstract class AbstractComponent implements ComponentInterface
         }
 
         throw new \RuntimeException("Plugin '@{$name}' not found.");
+    }
+
+    /**
+     * Get the application config
+     * 
+     * @return AppConfigInterface
+     */
+    protected function getAppConfig(): AppConfigInterface
+    {
+        return $this->appConfig;
     }
 
 }
