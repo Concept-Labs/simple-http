@@ -1,4 +1,8 @@
 {
+    "global": {
+        "layouts": "@include(etc/layouts.json)"
+    },
     "singularity": "@include(etc/sdi.json)",
-    "middleware": "@include(etc/middleware.json)"
+    "middleware": "@include(etc/middleware.json)",
+    "event-bus": "--@include(etc/event-bus.json)"
 }

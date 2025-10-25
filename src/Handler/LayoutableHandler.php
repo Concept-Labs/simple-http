@@ -52,7 +52,12 @@ abstract class LayoutableHandler extends SimpleHandler implements LayoutableHand
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         /*$this->response = */parent::handle($request);
-
+        /*
+        $dom = new \DOMDocument('1.0', 'UTF-8');
+        $dom->formatOutput = true;
+        $dom->preserveWhiteSpace = false;
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $this->getLayout()->render(), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        */
         $this
             ->body(
                 $this->getLayout()->render()

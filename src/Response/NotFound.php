@@ -6,6 +6,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Concept\Config\Contract\ConfigurableTrait;
+use Concept\SimpleHttp\Util\HeaderUtilInterface;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Server\MiddlewareInterface;
 

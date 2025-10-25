@@ -2,7 +2,6 @@
 
 namespace Concept\SimpleHttp\Handler;
 
-use Concept\SimpleHttp\Util\HeaderUtilInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

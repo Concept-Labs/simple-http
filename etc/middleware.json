@@ -1,5 +1,4 @@
 {
-    "router": "@include(example/router.json)",
 
     "concept-labs/simple-http:flusher": {
         "preference": "Concept\\SimpleHttp\\Response\\FlusherInterface",
